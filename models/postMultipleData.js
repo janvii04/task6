@@ -8,7 +8,7 @@ module.exports = (Sequelize, sequelize, DataTypes) => {
             type:Sequelize.UUID,
             allowNull: false,
             references: {
-                model: "postModel", 
+                model: "post", 
                 key: "id",
             },
             onUpdate: "CASCADE",

@@ -2,15 +2,15 @@ const Models = require("../models/index");
 const postMultipleData = require("../models/postMultipleData");
 
 
-Models.postModel.belongsTo(Models.userModel,{
-  foreignKey:"userId",
-  as: "userPost"
-})
-Models.userModel.hasMany(Models.postModel,{
-  foreignKey:"userId",
-  as: "postUser"
-})
-Models.postMultipleData.hasMany(Models.postMultipleData,{
+// Models.postModel.belongsTo(Models.userModel,{
+//   foreignKey:"userId",
+//   as: "userPost"
+// })
+// Models.userModel.hasMany(Models.postModel,{
+//   foreignKey:"userId",
+//   as: "postUser"
+// })
+Models.userModel.hasMany(Models.postMultipleData,{
   foreignKey:"userId",
   as:"userPostMultipleData"
 }
@@ -53,24 +53,24 @@ module.exports = {
       throw error;
     }
   },
-  findPostByUser: async (req, res)=> {
-    try {
-      let response = await Models.userModel.findAll({
-        include: [
-          {
-            model: Models.postModel,
-            required: false,
-            as: "postUser"
-          }
-        ]
-      })
+  // findPostByUser: async (req, res)=> {
+  //   try {
+  //     let response = await Models.userModel.findAll({
+  //       include: [
+  //         {
+  //           model: Models.postModel,
+  //           required: false,
+  //           as: "postUser"
+  //         }
+  //       ]
+  //     })
       
-      res.send(response);
-    } catch (error) {
-      console.log(error)
-      throw error
-    }
-  },
+  //     res.send(response);
+  //   } catch (error) {
+  //     console.log(error)
+  //     throw error
+  //   }
+  // },
 
 
   postMultipleData: async (req, res) => {
@@ -81,9 +81,9 @@ module.exports = {
             model: Models.postMultipleData,
             required: false,
             as: "userPostMultipleData",
-          },
-        ],
-      });
+          }
+        ]
+      })
   
       res.send(response)
       
