@@ -4,7 +4,7 @@ module.exports = (Sequelize, sequelize, DataTypes) => {
         {
             ...require("./cors")(Sequelize, DataTypes),
         
-        postID: {
+        postId: {
             type:Sequelize.UUID,
             allowNull: false,
             references: {

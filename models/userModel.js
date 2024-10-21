@@ -1,6 +1,6 @@
 module.exports = (Sequelize, sequelize, DataTypes) => {
     return sequelize.define(
-      "userModel",
+      "user",
       {
         ...require("./cors")(Sequelize, DataTypes),
         
@@ -11,7 +11,7 @@ module.exports = (Sequelize, sequelize, DataTypes) => {
       },
   
       {
-        tableName: "userModel",
+        tableName: "user",
       }
     );
   };
