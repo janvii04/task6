@@ -14,7 +14,23 @@ Models.userModel.hasMany(Models.postMultipleData,{
   foreignKey:"userId",
   as:"userPostMultipleData"
 }
-)
+);
+
+Models.userModel.hasMany(Models.postModel, {
+  foreignKey: "userId",
+  as: "finds"
+});
+
+Models.postModel.hasMany(Models.postMultipleData, {
+  foreignKey: "postId",
+  as: "posts"
+});
+
+Models.postMultipleData.belongsTo(Models.userModel, {
+  foreignKey: "userId",
+  as: "POSTS"
+});
+
 module.exports = {
   insert: async (req, res) => {
     try {
@@ -92,7 +108,37 @@ module.exports = {
       throw error
       
       }
-   }
+   },
+   findAllData: async (req, res) => {
+    try {
+        const response = await Models.userModel.findAll({
+            include: [
+                {
+       model: Models.postModel,
+        required: false,
+       as: "finds",
+         include: [
+         {
+          model: Models.postMultipleData,
+                            required: false,
+                            as: "posts",
+                            include:[
+                                {
+                                    model: Models.userModel,
+                                    required:false,
+                                    as:"POSTS"
+                                }
+                            ]
+                        }
+ ]
+ },
+            ] });
+        return res.send(response);
+    } catch (error) {
+        console.error(error);
+        throw (error)
+    }
+}
   };
   
   

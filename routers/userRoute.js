@@ -7,4 +7,7 @@ router.get("/getRecord", controllers.userController.getRecord);
 router.post("/insertPost",controllers.userController.insertPost);
 //router.get("/findPostByUser",controllers.userController.findPostByUser);
 router.post("/postMultipleData", controllers. userController.postMultipleData);
+router.get("/findAllData", controllers. userController.findAllData);
+
+
 module.exports = router;  
